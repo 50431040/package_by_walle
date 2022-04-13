@@ -1,8 +1,9 @@
 # package_by_walle
 
 Packaging Android apps through multiple channels(based on walle)
+flutter多渠道打包（基于[walle](https://github.com/Meituan-Dianping/walle)）
 
-## Getting Started
+## 打包配置
 
 `参考example目录`
 
@@ -47,7 +48,16 @@ channelFile = new File("${project.getProjectDir()}/channel")
 
 3. 根据第二步的渠道配置文件创建channel文件
 
-4. 切换到android目录，运行`gradlew clean assembleReleaseChannels --stacktrace`
+4. 切换到android目录，运行打包命令
+
+- 多渠道打包：`gradlew clean assembleReleaseChannels --stacktrace`
+- 单个渠道打包：`gradlew clean assembleReleaseChannels -PchannelList=meituan`
+
+## 本地调试
+
+```dart
+String channel = await PackageByWalle.getPackingChannel ?? "test";
+```
 
 ## 问题
 
