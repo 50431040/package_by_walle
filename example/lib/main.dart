@@ -16,24 +16,27 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  String _channel = 'Unknown';
+  Map<dynamic, dynamic>? _info;
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    initChannel();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
+  Future<void> initChannel() async {
+    String channel;
+    Map<dynamic, dynamic>? info;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
+      channel =
           await PackageByWalle.getPackingChannel ?? 'Unknown platform version';
+      info = await PackageByWalle.getPackingInfo;
     } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
+      channel = 'Failed to get platform version.';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -42,7 +45,8 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _platformVersion = platformVersion;
+      _channel = channel;
+      _info = info;
     });
   }
 
@@ -53,8 +57,11 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Column(
+          children: [
+            Text('channel is: $_channel'),
+            Text('info is: ${_info ?? ""}')
+          ],
         ),
       ),
     );

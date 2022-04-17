@@ -4,7 +4,10 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.meituan.android.walle.ChannelInfo;
 import com.meituan.android.walle.WalleChannelReader;
+
+import java.util.Map;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
@@ -37,6 +40,14 @@ public class PackageByWallePlugin implements FlutterPlugin, MethodCallHandler {
         result.success(channel);
       } catch(Exception e) {
         result.success("unknown");
+      }
+    } else if (call.method.equals("getPackingInfo")) {
+      ChannelInfo channelInfo= WalleChannelReader.getChannelInfo(this.applicationContext);
+      if (channelInfo != null) {
+        Map<String, String> extraInfo = channelInfo.getExtraInfo();
+        result.success(extraInfo);
+      } else {
+        result.success(null);
       }
     } else {
       result.notImplemented();

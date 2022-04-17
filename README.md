@@ -12,6 +12,7 @@ flutter多渠道打包（基于[walle](https://github.com/Meituan-Dianping/walle
 ```
 buildscript {
     repositories {
+        // 不加这个会出现找不到插件的报错
         maven {
             url 'https://maven.aliyun.com/repository/jcenter'
         }
@@ -41,12 +42,15 @@ walle {
 apkOutputFolder = new File("${project.rootDir}/output/channels/")
 // 定制渠道包的APK的文件名称
 apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk'
-// 渠道配置文件
+// 1. channelFile形式（渠道配置文件）
 channelFile = new File("${project.getProjectDir()}/channel")
+// 2. 渠道&额外信息配置文件，与channelFile互斥
+// 此配置项与channelFile功能互斥，开发者在使用时选择其一即可，两者都存在时configFile优先执行。
+configFile = new File("${project.rootDir}/config.json")
 }
 ```
 
-3. 根据第二步的渠道配置文件创建channel文件
+3. 在第二步中选择创建一种配置方式，然后创建对应的文件。（具体路径及文件参考example目录）
 
 4. 切换到android目录，运行打包命令
 
@@ -74,5 +78,17 @@ android {
     }
     
     // ...
+}
+```
+
+2. Could not find com.meituan.android.walle:plugin:1.1.7.
+
+```
+// 在 android/build.gradle 添加代码
+maven {
+    url 'https://maven.aliyun.com/repository/jcenter'
+}
+maven {
+    url 'https://maven.aliyun.com/repository/google'
 }
 ```
