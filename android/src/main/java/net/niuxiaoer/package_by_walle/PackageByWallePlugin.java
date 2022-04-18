@@ -42,7 +42,7 @@ public class PackageByWallePlugin implements FlutterPlugin, MethodCallHandler {
         result.success("unknown");
       }
     } else if (call.method.equals("getPackingInfo")) {
-      ChannelInfo channelInfo= WalleChannelReader.getChannelInfo(this.applicationContext);
+      ChannelInfo channelInfo = WalleChannelReader.getChannelInfo(this.applicationContext);
       if (channelInfo != null) {
         Map<String, String> extraInfo = channelInfo.getExtraInfo();
         result.success(extraInfo);

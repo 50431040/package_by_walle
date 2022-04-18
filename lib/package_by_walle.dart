@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 
@@ -12,7 +13,11 @@ class PackageByWalle {
   }
 
   static Future<Map<dynamic, dynamic>?> get getPackingInfo async {
-    final Map<dynamic, dynamic>? info = await _channel.invokeMethod('getPackingInfo');
-    return info;
+    if (Platform.isAndroid) {
+      final Map<dynamic, dynamic>? info = await _channel.invokeMethod('getPackingInfo');
+      return info;
+    } else {
+      return null;
+    }
   }
 }
