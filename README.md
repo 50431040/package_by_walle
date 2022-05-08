@@ -3,9 +3,13 @@
 Packaging Android apps through multiple channels(based on walle)
 flutter多渠道打包（基于[walle](https://github.com/Meituan-Dianping/walle)）
 
-## 打包配置
+## 安装
 
-`参考example目录`
+`package_by_walle: 1.0.1`
+
+## 配置
+
+`请务必按照步骤一步步配置，参考example目录`
 
 1. 在 android/build.gradle 添加代码
 
@@ -57,10 +61,14 @@ configFile = new File("${project.rootDir}/config.json")
 - 多渠道打包：`gradlew clean assembleReleaseChannels --stacktrace`
 - 单个渠道打包：`gradlew clean assembleReleaseChannels -PchannelList=meituan`
 
-## 本地调试
+## 使用
 
 ```dart
+// 获取渠道号
 String channel = await PackageByWalle.getPackingChannel ?? "test";
+
+// 获取打包配置（configFile文件中配置）
+var info = await PackageByWalle.getPackingInfo;
 ```
 
 ## 问题
@@ -92,3 +100,5 @@ maven {
     url 'https://maven.aliyun.com/repository/google'
 }
 ```
+
+3. 其他问题请提issue

@@ -25,15 +25,17 @@ class _MyAppState extends State<MyApp> {
     initChannel();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
+  /// 初始化
   Future<void> initChannel() async {
     String channel;
     Map<dynamic, dynamic>? info;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
+      // 获取渠道号
       channel =
-          await PackageByWalle.getPackingChannel ?? 'Unknown platform version';
+          await PackageByWalle.getPackingChannel ?? 'test';
+      // 获取打包配置（configFile文件中配置）
       info = await PackageByWalle.getPackingInfo;
     } on PlatformException {
       channel = 'Failed to get platform version.';
