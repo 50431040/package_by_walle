@@ -1,6 +1,6 @@
 name: package_by_walle
 description: Packaging Android apps through multiple channels(based on walle)
-version: 1.0.1
+version: 1.0.2
 homepage: "https://github.com/50431040/package_by_walle"
 
 environment:

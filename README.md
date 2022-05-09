@@ -1,17 +1,16 @@
 # package_by_walle
 
-Packaging Android apps through multiple channels(based on walle)
 flutter多渠道打包（基于[walle](https://github.com/Meituan-Dianping/walle)）
 
 ## 安装
 
-`package_by_walle: 1.0.1`
+`package_by_walle: 1.0.2`
 
 ## 配置
 
-`请务必按照步骤一步步配置，参考example目录`
+> 请务必按照步骤一步步配置，参考example目录
 
-1. 在 android/build.gradle 添加代码
+1. 添加`walle`插件依赖：在`android/build.gradle`文件中添加
 
 ```
 buildscript {
@@ -35,7 +34,7 @@ buildscript {
 }
 ```
 
-2. 在 android/app/build.gradle 最后添加
+2. walle打包配置：在`android/app/build.gradle`文件最后添加。（channelFile 和 configFile 任选其一）
 
 ```
 // 添加以下代码
@@ -54,9 +53,9 @@ configFile = new File("${project.rootDir}/config.json")
 }
 ```
 
-3. 在第二步中选择创建一种配置方式，然后创建对应的文件。（具体路径及文件参考example目录）
+3. 在第二步中选择创建一种配置方式，然后创建对应的文件。（参考example/android目录）
 
-4. 切换到android目录，运行打包命令
+4. 命令行切换到android目录，运行打包命令
 
 - 多渠道打包：`gradlew clean assembleReleaseChannels --stacktrace`
 - 单个渠道打包：`gradlew clean assembleReleaseChannels -PchannelList=meituan`
@@ -67,8 +66,8 @@ configFile = new File("${project.rootDir}/config.json")
 // 获取渠道号
 String channel = await PackageByWalle.getPackingChannel ?? "test";
 
-// 获取打包配置（configFile文件中配置）
-var info = await PackageByWalle.getPackingInfo;
+// 获取额外打包参数（configFile文件中配置）
+Map info = await PackageByWalle.getPackingInfo;
 ```
 
 ## 问题

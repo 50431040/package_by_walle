@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:io';
 
@@ -18,7 +17,8 @@ class PackageByWalle {
   /// 获取打包相关配置
   static Future<Map<dynamic, dynamic>?> get getPackingInfo async {
     if (Platform.isAndroid) {
-      final Map<dynamic, dynamic>? info = await _channel.invokeMethod('getPackingInfo');
+      final Map<dynamic, dynamic>? info =
+          await _channel.invokeMethod('getPackingInfo');
       return info;
     } else {
       return null;

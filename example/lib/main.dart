@@ -33,8 +33,7 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       // 获取渠道号
-      channel =
-          await PackageByWalle.getPackingChannel ?? 'test';
+      channel = await PackageByWalle.getPackingChannel ?? 'test';
       // 获取打包配置（configFile文件中配置）
       info = await PackageByWalle.getPackingInfo;
     } on PlatformException {
