@@ -6,6 +6,10 @@ flutter多渠道打包（基于[walle](https://github.com/Meituan-Dianping/walle
 
 `package_by_walle: 1.0.2`
 
+## 注意
+
+**经过线上测试，存在小部分机型获取不到渠道的情况，请慎重使用**
+
 ## 配置
 
 > 请务必按照步骤一步步配置，参考example目录
